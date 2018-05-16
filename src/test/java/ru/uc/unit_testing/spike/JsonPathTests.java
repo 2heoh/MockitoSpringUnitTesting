@@ -13,6 +13,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.assertEquals;
 
 public class JsonPathTests {
 
@@ -46,8 +47,10 @@ public class JsonPathTests {
     public void idOfEraserIs_10003 () throws JSONException {
         DocumentContext json = getJsonWith3Items();
 
-        JSONArray result = (JSONArray) json.read("$.[?(@.name=='Eraser')]");
+        String result = json.read("$.[?(@.name=='Eraser')]").toString();
 
-        JSONAssert.assertEquals("[{id:10003}]", result, false);//        assertThat(item).isEqualTo("[{\"id\":10003}]") ;
+
+
+        assertEquals("[{\"id\":10003,\"name\":\"Eraser\",\"quantity\":15}]", result);
     }
 }
